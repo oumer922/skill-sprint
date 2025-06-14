@@ -1,0 +1,14 @@
+{
+  "name": "skill-sprint",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+     "dev": "concurrently \"pnpm --filter api-ai-coach start\" \"pnpm --filter arp-gateway start\" \"pnpm --filter web-frontend dev\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.12.1"
+}
