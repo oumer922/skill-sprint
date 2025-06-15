@@ -69,6 +69,16 @@ All apps log their prompts and responses using:
 ### 1. Install dependencies
 ```bash
 pnpm install
+
+### 2. Run the MCP server
+```bash
 pnpm --filter mcp-server dev
+
+### 3. Run any frontend app
+```bash
 pnpm --filter app-name dev
+
+Example:
+```bash
+
 pnpm --filter quiz-maker dev
