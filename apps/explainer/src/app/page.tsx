@@ -41,7 +41,7 @@ export default function CodeReviewer() {
         className="min-h-[120px]"
       />
       <Button onClick={handleSubmit} disabled={loading}>
-        {loading ? "Reviewing..." : "Submit"}
+        {loading ? "Explaining..." : "Submit"}
       </Button>
 
       {response && (
