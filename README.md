@@ -33,9 +33,7 @@ The **MCP (Model Context Protocol)** server is responsible for:
 - Logging each request/response to the shared database.
 
 ### ✅ Current API Provider
-- **OpenAI** (fallback model: `gpt-3.5-turbo`)
-- **Cohere** or **Gemini** can be optionally configured.
-
+- **Cohere** 
 📍 Server runs at: `http://localhost:3001`
 
 ---
@@ -51,8 +49,6 @@ Each app has its own unique role and interface, but all communicate with the sam
 | quiz-maker       | Quiz Generator              | Creates short quizzes based on provided topics.            |
 | writing-coach    | Writing Coach               | Helps improve writing structure and clarity.               |
 | language-helper  | Language Helper             | Provides grammar correction, rewriting, and translation.   |
-| skillhub (main)  | Combined Role UI            | A unified interface to switch roles and use all features.  |
-
 ---
 
 ## 🧱 Middleware & DB Logging
