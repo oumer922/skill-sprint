@@ -9,6 +9,13 @@ export default function Home() {
     setLoading(true);
     setResponse("");
 
+    if (!prompt.trim()) {
+  alert("Please enter a prompt before submitting.");
+  setLoading(false);
+  return;
+}
+
+
     try {
       const res = await fetch("/api/ai/contextual", {
         method: "POST",
