@@ -1,85 +1,66 @@
-
 # 🛠️ Skill Sprint
 
-> A collaborative software integration and engineering project demonstrating modular AI integration with centralized control using a shared **Model Context Protocol (MCP)** and **Database Middleware**.
+> A collaborative software integration and engineering project that brings together multiple AI-powered frontend apps under one unified system using a shared **Model Context Protocol (MCP)** and **Database Middleware**.
 
 ---
 
-## 📘 Part 1 – Introduction: Software Integration and Engineering
+## 📘 Introduction: Software Integration & Engineering
 
-**Software integration** is the process of combining multiple software modules into one unified system. This includes aligning APIs, managing shared data models, and ensuring seamless communication between frontend, backend, and external services. Engineering this integration requires structured coordination, role division, and well-defined protocols.
-
-**Skill Sprint** is designed as a team project where members build separate frontend applications with unique AI assistant roles (e.g., Quiz Maker, Writing Coach, Language Helper), but all use a centralized AI service and database backend. The result is a robust, scalable architecture that reflects real-world modular system design.
-
----
-
-## ⚙️ Part 2 – MCP Server with Fully Implemented Functionality (15%)
-
-### ✅ What Is the MCP Server?
-
-The **Model Context Protocol (MCP)** Server is a centralized Node.js API that:
-- Accepts prompt requests from all frontend apps.
-- Routes them to an AI provider (OpenAI, Cohere, or Gemini).
-- Logs the request/response cycle in the shared database.
-- Returns a formatted response for display.
-
-### 🔁 Configurable AI Providers
-You can switch the provider easily:
-- `OpenAI` (default): Works with GPT-3.5/4.
-- `Gemini`: Can be used via Google's AI Studio API (limited).
-- `Cohere`: Works with `command-r-plus` via `/chat` endpoint.
-
-### 🌐 Endpoint
-```bash
-POST http://localhost:3001/api/mcp
-```
-
-### 🔧 Example Request
-```json
-{
-  "role": "quiz-maker",
-  "prompt": "Create a 3-question quiz on World War II"
-}
-```
-
-### 📦 Example Response
-```json
-{
-  "output": "1. Who was the leader of Nazi Germany?\n2. What year did WWII begin?\n3. Name one Allied Power."
-}
-```
+**Skill Sprint** demonstrates how modern software components—including backend APIs, frontend UIs, authentication, and role-based logic—can be effectively integrated into a modular monorepo architecture. This project is designed to simulate a real-world, team-based software development sprint, where:
+- Multiple developers work on isolated apps with unique responsibilities.
+- A central AI server (MCP) handles requests from all apps via a shared protocol.
+- A common database records all prompt and response data across roles.
 
 ---
 
-## 🧩 Part 3 – Apps That Use MCP / Middleware DB
+## ⚙️ Architecture Overview
 
-Each app is an AI assistant for a specific task. All apps share the same backend server and Prisma-based DB middleware to track all prompt sessions.
-
-| App Name         | Role                        | Functionality                                                                 |
-|------------------|-----------------------------|-------------------------------------------------------------------------------|
-| `code-reviewer`  | Code Reviewer               | Accepts code snippets and returns reviews/suggestions                        |
-| `explainer`      | Concept Explainer           | Explains technical or abstract ideas in simple terms                         |
-| `quiz-maker`     | Quiz Generator              | Generates quiz questions based on user-supplied topics                       |
-| `writing-coach`  | Writing Coach               | Improves writing quality, style, and clarity                                 |
-| `language-helper`| Language Assistant          | Offers grammar corrections, translations, and rewriting                      |
-| `skillhub`       | Combined Role Navigator     | Lets user switch between roles from a single page with dynamic routing       |
-
-### 🧱 Shared Middleware Features:
-- All apps log to a shared SQLite/PostgreSQL database using Prisma
-- Requests and responses are auto-logged with role metadata
-- Shared logic lives in `packages/db` and `packages/middleware`
+- **Monorepo:** Powered by `pnpm` workspaces with `apps/` and `packages/` structure.
+- **Frontend Apps:** Role-specific UIs built using Next.js, Tailwind CSS, and shadcn/ui.
+- **MCP Server:** Handles all AI API communication (OpenAI, Gemini, or Cohere).
+- **Middleware & DB:** Shared Prisma-based logic for logging user prompts/responses.
+- **Auth:** Integrated with Clerk for user authentication (not yet deployed).
 
 ---
 
-## 🧑‍💻 Group Work Breakdown
+## 🧠 MCP Server
 
-| Member             | Responsibility                                                |
-|--------------------|----------------------------------------------------------------|
-| Member A           | MCP Server, AI Integration Layer, Middleware DB (15%)          |
-| Member B           | Code Reviewer + Concept Explainer Frontend                     |
-| Member C           | Quiz Maker + Writing Coach Frontend                            |
-| Member D           | Unified Role UI (`skillhub`) and navigation                    |
-| Member E           | GitOps, Prisma Schema, Clerk Auth (optional), Styling          |
+The **MCP (Model Context Protocol)** server is responsible for:
+
+- Receiving requests from any frontend app (e.g., quiz-maker, explainer).
+- Passing the user's prompt and role metadata to an AI API (OpenAI, Gemini, etc.).
+- Returning the generated output in a consistent format.
+- Logging each request/response to the shared database.
+
+### ✅ Current API Provider
+- **OpenAI** (fallback model: `gpt-3.5-turbo`)
+- **Cohere** or **Gemini** can be optionally configured.
+
+📍 Server runs at: `http://localhost:3001`
+
+---
+
+## 🧩 Apps That Use MCP
+
+Each app has its own unique role and interface, but all communicate with the same MCP server and DB middleware.
+
+| App Name         | Role                        | Description                                                |
+|------------------|-----------------------------|------------------------------------------------------------|
+| code-reviewer    | Code Reviewer               | Reviews code snippets and provides improvement suggestions.|
+| explainer        | Concept Explainer           | Breaks down technical topics into simple explanations.     |
+| quiz-maker       | Quiz Generator              | Creates short quizzes based on provided topics.            |
+| writing-coach    | Writing Coach               | Helps improve writing structure and clarity.               |
+| language-helper  | Language Helper             | Provides grammar correction, rewriting, and translation.   |
+| skillhub (main)  | Combined Role UI            | A unified interface to switch roles and use all features.  |
+
+---
+
+## 🧱 Middleware & DB Logging
+
+All apps log their prompts and responses using:
+- **Prisma ORM**
+- Shared DB schema in `packages/db`
+- Logging handled automatically via shared middleware.
 
 ---
 
