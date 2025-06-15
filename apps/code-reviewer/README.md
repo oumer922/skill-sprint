@@ -13,6 +13,16 @@ pnpm dev
 # or
 bun dev
 ```
+## Tech Stack
+
+- ⚛️ React (Next.js 13+)
+- 💅 Tailwind CSS
+- 🧪 TypeScript
+- 🚀 Vercel (for deployment)
+- 🧠 OpenAI API (or custom AI backend)
+
+
+
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
