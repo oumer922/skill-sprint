@@ -58,25 +58,37 @@ export default function CodeReviewer() {
 
 
   return (
-    <main className="max-w-xl mx-auto mt-10 space-y-6">
-      <h1 className="text-2xl font-bold">Explainer</h1>
-      <Textarea
-        value={prompt}
-        onChange={(e: { target: { value: SetStateAction<string>; }; }) => setPrompt(e.target.value)}
-        placeholder="Enter a concept you'd like explained."
-        className="min-h-[120px]"
-      />
-      <Button onClick={handleSubmit} disabled={loading}>
-        {loading ? "Explaining..." : "Submit"}
-      </Button>
+  <main className="max-w-xl mx-auto mt-10 space-y-6">
+    {/* Page title */}
+    <h1 className="text-2xl font-bold">Explainer</h1>
 
-      {response && (
-        <Card>
-          <CardContent className="p-4 whitespace-pre-wrap">
-            {response}
-          </CardContent>
-        </Card>
-      )}
-    </main>
-  );
+    {/* Textarea input for user prompt */}
+    <Textarea
+      value={prompt} // Controlled component value
+      onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+        setPrompt(e.target.value)
+      }
+      placeholder="Enter a concept you'd like explained." // Helpful placeholder text
+      className="min-h-[120px]" // Ensures minimum height for better UX
+    />
+
+    {/* Submit button with loading state */}
+    <Button
+      onClick={handleSubmit}   // Handles form submission
+      disabled={loading}       // Disable button while loading
+    >
+      {loading ? "Explaining..." : "Submit"} {/* Shows loading state text */}
+    </Button>
+
+    {/* Display the explanation result if it exists */}
+    {response && (
+      <Card>
+        <CardContent className="p-4 whitespace-pre-wrap">
+          {/* Preserves line breaks and spacing */}
+          {response}
+        </CardContent>
+      </Card>
+    )}
+  </main>
+);
 }
