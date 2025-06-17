@@ -84,10 +84,6 @@ pnpm --filter skillhub dev
 
 ---
 
-## 📜 Example Reference Project
-
-This architecture is inspired by real integrations like:
-
 **🖼️ ImageGen Telegram Bot**  
 GitHub: [https://github.com/diagomike/integrate-ai-imagebot](https://github.com/diagomike/integrate-ai-imagebot)  
 It uses a single AI backend with Telegram frontend and database logging.
