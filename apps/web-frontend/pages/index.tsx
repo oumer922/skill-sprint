@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 export default function Home() {
   const [prompt, setPrompt] = useState("");
@@ -10,11 +10,10 @@ export default function Home() {
     setResponse("");
 
     if (!prompt.trim()) {
-  alert("Please enter a prompt before submitting.");
-  setLoading(false);
-  return;
-}
-
+      alert("Please enter a prompt before submitting.");
+      setLoading(false);
+      return;
+    }
 
     try {
       const res = await fetch("/api/ai/contextual", {
@@ -40,16 +39,41 @@ export default function Home() {
   return (
     <div style={{ padding: "2rem", fontFamily: "Arial" }}>
       <h1>AI Skill Coach</h1>
+
       <textarea
         rows={5}
         style={{ width: "100%", marginBottom: "1rem" }}
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
-        placeholder="Enter your coding task or question..."
-      />
-      <button onClick={submitPrompt} disabled={loading}>
-        {loading ? "Submitting..." : "Submit"}
-      </button>
+        placeholder="Enter your coding task or question... (Ctrl+Enter to submit)"
+        onKeyDown={(e) => {
+          if (e.ctrlKey && e.key === "Enter") {
+            e.preventDefault();
+            submitPrompt();
+          }
+        }}
+      ></textarea>
+
+      <div style={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>
+        <button
+          type="button"
+          onClick={submitPrompt}
+          disabled={loading || !prompt.trim()}
+        >
+          {loading ? "Submitting..." : "Submit"}
+        </button>
+
+        <button
+          type="button"
+          onClick={() => {
+            setPrompt("");
+            setResponse("");
+          }}
+          disabled={loading}
+        >
+          Clear
+        </button>
+      </div>
 
       {response && (
         <div style={{ marginTop: "2rem", whiteSpace: "pre-wrap" }}>
@@ -60,3 +84,6 @@ export default function Home() {
     </div>
   );
 }
+
+
+
